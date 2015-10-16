@@ -10,5 +10,21 @@ class Legislator < ActiveRecord::Base
   	self.where("title = ? AND state = ?",["Sen", state])
   end
 
+  def self.senator(party)
+  	self.where("title = ? AND party = ?",["Sen", party])
+  end
+
+  def self.representative(party)
+  	self.where("title = ? AND party = ?",["Rep", party])
+  end
+
+  def getinfo(attribute)
+  	self.attribute
+  end
+
+  def in_office?
+  	self.in_office
+  end
+
 end
 

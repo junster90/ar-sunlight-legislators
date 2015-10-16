@@ -6,6 +6,7 @@ class SunlightLegislatorsImporter
     csv.each do |row|
       row.each do |field, value|
         # TODO: begin
+        data = field.split(',')s
         raise NotImplementedError, "TODO: figure out what to do with this row and do it!"
         # TODO: end
       end
