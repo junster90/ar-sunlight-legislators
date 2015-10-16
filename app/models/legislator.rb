@@ -18,6 +18,10 @@ class Legislator < ActiveRecord::Base
   	self.where("title = 'Rep' AND party = ?",[party])
   end
 
+  def name
+  	"#{self.firstname} #{self.lastname}"
+  end
+
   def self.getinfo(attribute,firstname,lastname)
   	selection = self.find_by(firstname: firstname, lastname: lastname)
   	selection[attribute]
