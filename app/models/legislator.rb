@@ -3,27 +3,34 @@ require_relative '../../db/config'
 class Legislator < ActiveRecord::Base
 
   def self.rep_of_state(state)
-  	self.where("title = ? AND state = ?",["Rep", state])
+  	self.where("title = 'Rep' AND state = ?",[state])
   end
 
   def self.sen_of_state(state)
-  	self.where("title = ? AND state = ?",["Sen", state])
+  	self.where("title = 'Sen' AND in_office = '1' AND state = ?",[state])
   end
 
   def self.senator(party)
-  	self.where("title = ? AND party = ?",["Sen", party])
+  	self.where("title = 'Sen' AND party = ?",[party])
   end
 
   def self.representative(party)
-  	self.where("title = ? AND party = ?",["Rep", party])
+  	self.where("title = 'Rep' AND party = ?",[party])
   end
 
-  def getinfo(attribute)
-  	self.attribute
+  def self.getinfo(attribute,firstname,lastname)
+  	selection = self.find_by(firstname: firstname, lastname: lastname)
+  	selection[attribute]
   end
 
-  def in_office?
-  	self.in_office
+  def self.in_office?(firstname,lastname)
+  	selection = self.find_by(firstname: firstname, lastname: lastname)
+	  	if selection[:in_office] == 1
+	  		true
+	  	else
+	  		false
+	  	end
+  	
   end
 
 end
